@@ -39,7 +39,7 @@ class ChangesFileBuilder {
     	ChangeSet[] tmp=changesProvider.getChangesSets();
     	String distribution=tmp[0].getDistribution();
     	
-        ChangesFile changesFile = new ChangesFile(distribution);
+        ChangesFile changesFile = new ChangesFile();
         changesFile.setChanges(changesProvider.getChangesSets());
         changesFile.initialize(packageControlFile);
 

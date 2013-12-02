@@ -52,7 +52,7 @@ public final class ChangesFile extends ControlFile {
             new ControlField("Files", true, ControlField.Type.MULTILINE, true)
     };
 
-    public ChangesFile(String distribution) {
+    public ChangesFile() {
         set("Format", "1.8");
     }
 
