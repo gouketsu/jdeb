@@ -35,8 +35,9 @@ import org.vafer.jdeb.utils.InformationOutputStream;
 class ChangesFileBuilder {
 
     public ChangesFile createChanges(BinaryPackageControlFile packageControlFile, File binaryPackage, ChangesProvider changesProvider) throws IOException, PackagingException {
-    	ChangeSet[] tmp=changesProvider.getChangesSets();
-    	String distribution=tmp[0].getDistribution();
+        ChangesFile changesFile = new ChangesFile();
+        changesFile.setChanges(changesProvider.getChangesSets());
+        changesFile.initialize(packageControlFile);
 
         changesFile.set("Date", ChangesFile.DATE_FORMAT.format(new Date()));
         
