@@ -153,7 +153,16 @@ public class DebMojo extends AbstractPluginMojo {
      */
     @Parameter
     private String classifier;
+    
+    @Parameter
+    private String keyring;
+    
+    @Parameter
+    private String key;
 
+    @Parameter (defaultValue = "")
+    private String passphrase;
+    
     /**
      * "data" entries used to determine which files should be added to this deb.
      * The "data" entries may specify a tarball (tar.gz, tar.bz2, tgz), a
@@ -465,6 +474,12 @@ public class DebMojo extends AbstractPluginMojo {
             debMaker.setPassphrase(passphrase);
             debMaker.setSignPackage(signPackage);
             debMaker.setResolver(resolver);
+            debMaker.setKeyring(keyringFile);
+            debMaker.setKey(key);
+            if (passphrase != null)
+            	debMaker.setPassphrase(passphrase);
+            else
+            	debMaker.setPassphrase("");
             debMaker.validate();
             debMaker.makeDeb();
 

@@ -71,7 +71,7 @@ public final class TextfileChangesProvider implements ChangesProvider {
                 changeSetColl.add(changeSet);
                 break;
             }
-
+            
             if (line.startsWith("release ")) {
 
                 if (changesColl.size() > 0) {

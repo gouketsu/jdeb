@@ -300,7 +300,7 @@ public class DebMaker {
             
             ChangesFileBuilder builder = new ChangesFileBuilder();
             ChangesFile changesFile = builder.createChanges(packageControlFile, deb, changesProvider);
-            
+
             if (keyring != null && key != null && passphrase != null) {
                 console.info("Signing the changes file with the key " + key);
                 PGPSigner signer = new PGPSigner(new FileInputStream(keyring), key, passphrase);

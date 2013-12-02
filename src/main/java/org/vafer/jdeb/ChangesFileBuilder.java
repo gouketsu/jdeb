@@ -24,6 +24,7 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.NullOutputStream;
+import org.vafer.jdeb.changes.ChangeSet;
 import org.vafer.jdeb.changes.ChangesProvider;
 import org.vafer.jdeb.debian.BinaryPackageControlFile;
 import org.vafer.jdeb.debian.ChangesFile;
@@ -35,8 +36,10 @@ import org.vafer.jdeb.utils.InformationOutputStream;
 class ChangesFileBuilder {
 
     public ChangesFile createChanges(BinaryPackageControlFile packageControlFile, File binaryPackage, ChangesProvider changesProvider) throws IOException, PackagingException {
-
-        ChangesFile changesFile = new ChangesFile();
+    	ChangeSet[] tmp=changesProvider.getChangesSets();
+    	String distribution=tmp[0].getDistribution();
+    	
+        ChangesFile changesFile = new ChangesFile(distribution);
         changesFile.setChanges(changesProvider.getChangesSets());
         changesFile.initialize(packageControlFile);
 

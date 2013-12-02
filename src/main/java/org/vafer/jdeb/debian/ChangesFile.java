@@ -52,9 +52,13 @@ public final class ChangesFile extends ControlFile {
             new ControlField("Files", true, ControlField.Type.MULTILINE, true)
     };
 
-    public ChangesFile() {
+    public ChangesFile(String distribution) {
         set("Format", "1.8");
-        set("Distribution", "stable");
+        if (distribution == null || distribution.equals("unknown")) {
+        	set("Distribution", "stable");
+        }else{
+        	set("Distribution", distribution);
+        }
     }
 
     /**
@@ -72,7 +76,8 @@ public final class ChangesFile extends ControlFile {
         set("Changed-By",   packageControlFile.get("Maintainer"));
 
         for (Entry<String, String> entry : packageControlFile.getUserDefinedFields().entrySet()) {
-            set(entry.getKey(), entry.getValue());
+        	System.out.println("Initialize change file "+entry.getKey()+" " +entry.getValue());
+        	set(entry.getKey(), entry.getValue());
         }
 
         StringBuilder description = new StringBuilder();
