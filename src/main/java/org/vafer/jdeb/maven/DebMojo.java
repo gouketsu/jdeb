@@ -154,15 +154,6 @@ public class DebMojo extends AbstractPluginMojo {
     @Parameter
     private String classifier;
     
-    @Parameter
-    private String keyring;
-    
-    @Parameter
-    private String key;
-
-    @Parameter (defaultValue = "")
-    private String passphrase;
-    
     /**
      * "data" entries used to determine which files should be added to this deb.
      * The "data" entries may specify a tarball (tar.gz, tar.bz2, tgz), a
@@ -246,7 +237,7 @@ public class DebMojo extends AbstractPluginMojo {
      */
     @Parameter(defaultValue = "false")
     private boolean signPackage;
-
+    
     /**
      * The keyring to use for signing operations.
      */
@@ -263,7 +254,7 @@ public class DebMojo extends AbstractPluginMojo {
      * The passphrase to use for signing operations.
      */
     @Parameter
-    private String passphrase; 
+    private String passphrase;
 
     /**
      * The prefix to use when reading signing variables
@@ -397,7 +388,7 @@ public class DebMojo extends AbstractPluginMojo {
         final File changesOutFile = new File(Utils.replaceVariables(resolver, changesOut, openReplaceToken, closeReplaceToken));
         final File changesSaveFile = new File(Utils.replaceVariables(resolver, changesSave, openReplaceToken, closeReplaceToken));
         final File keyringFile = keyring == null ? null : new File(Utils.replaceVariables(resolver, keyring, openReplaceToken, closeReplaceToken));
-
+        
         // if there are no producers defined we try to use the artifacts
         if (dataProducers.isEmpty()) {
 
@@ -471,15 +462,9 @@ public class DebMojo extends AbstractPluginMojo {
             debMaker.setCompression(compression);
             debMaker.setKeyring(keyringFile);
             debMaker.setKey(key);
-            debMaker.setPassphrase(passphrase);
+            debMaker.setPassphrase(passphrase== null ? "" : passphrase);
             debMaker.setSignPackage(signPackage);
             debMaker.setResolver(resolver);
-            debMaker.setKeyring(keyringFile);
-            debMaker.setKey(key);
-            if (passphrase != null)
-            	debMaker.setPassphrase(passphrase);
-            else
-            	debMaker.setPassphrase("");
             debMaker.validate();
             debMaker.makeDeb();
 

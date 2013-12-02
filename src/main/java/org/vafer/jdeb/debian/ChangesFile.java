@@ -54,11 +54,6 @@ public final class ChangesFile extends ControlFile {
 
     public ChangesFile(String distribution) {
         set("Format", "1.8");
-        if (distribution == null || distribution.equals("unknown")) {
-        	set("Distribution", "stable");
-        }else{
-        	set("Distribution", distribution);
-        }
     }
 
     /**
@@ -74,9 +69,9 @@ public final class ChangesFile extends ControlFile {
         set("Version",      packageControlFile.get("Version"));
         set("Maintainer",   packageControlFile.get("Maintainer"));
         set("Changed-By",   packageControlFile.get("Maintainer"));
+        set("Distribution", packageControlFile.get("Maintainer")== null ? "stable": packageControlFile.get("Distribution"));
 
         for (Entry<String, String> entry : packageControlFile.getUserDefinedFields().entrySet()) {
-        	System.out.println("Initialize change file "+entry.getKey()+" " +entry.getValue());
         	set(entry.getKey(), entry.getValue());
         }
 

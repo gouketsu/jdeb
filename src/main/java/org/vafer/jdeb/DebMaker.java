@@ -292,7 +292,8 @@ public class DebMaker {
                     public ChangeSet[] getChangesSets() {
                         return new ChangeSet[] {
                                 new ChangeSet(packageControlFile.get("Package"), packageControlFile.get("Version"), new Date(),
-                                        "stable", "low", packageControlFile.get("Maintainer"), new String[0])
+                                		packageControlFile.get("Distribution") == null ? "stable" : packageControlFile.get("Distribution"),
+                                				"low", packageControlFile.get("Maintainer"), new String[0])
                         };
                     }
                 };
